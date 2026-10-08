@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Заметки</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Это для анимации фона -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Эо вход на страницу -->
+  <div id="auth-screen">
+    <form id="auth-form" class="auth-card">
+      <div class="auth-logo"></div>
+      <h1>Заметки</h1>
+      <p class="auth-hint" id="auth-hint">Войдите, чтобы продолжить</p>
+      <input type="text" id="auth-login" placeholder="Логин" required>
+      <input type="password" id="auth-pass" placeholder="Пароль" required>
+      <p id="auth-error"></p>
+      <button type="submit" id="auth-btn">Войти</button>
+      <button type="button" id="auth-toggle" class="link-btn">Создать аккаунт</button>
+    </form>
+  </div>
+
+  <!-- само приложение-->
+  <div id="app" class="hidden">
+
+    <!-- Верхняя строчка -->
+    <header class="topbar">
+      <div class="topbar-logo"><span>Заметки</span></div>
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-input" placeholder="Поиск заметок">
+      </div>
+      <div class="topbar-right">
+        <span id="user-name"></span>
+        <button id="logout-btn" class="logout-btn">Выйти</button>
+      </div>
+    </header>
+
+    <div class="app-body">
+
+      <!-- Это сайд панель -->
+      <aside class="sidebar">
+        <button class="nav-btn active" data-view="notes"><span>Заметки</span></button>
+        <button class="nav-btn" data-view="trash"><span>Черновики</span></button>
+      </aside>
+
+      <!-- Тут вся инфа о заметках -->
+      <main class="content">
+        <div class="content-header">
+            <h2 id="view-title">Заметки</h2>
+            <div class="content-actions">
+                <select id="sort-select" title="Сортировка">
+                <option value="updated-desc">Сначала изменённые</option>
+                <option value="updated-asc">Сначала старые (изменение)</option>
+                <option value="created-desc">Сначала новые</option>
+                <option value="created-asc">Сначала старые</option>
+                <option value="title-asc">По названию (А–Я)</option>
+                <option value="title-desc">По названию (Я–А)</option>
+                </select>
+                <button id="new-note-btn">＋ Создать заметку</button>
+            </div>
+            </div>
+        <div id="notes-grid"></div>
+        <p id="empty-msg"></p>
+      </main>
+
+    </div>
+
+    <!-- Окно редактора заметок -->
+    <div id="editor-overlay" class="hidden">
+      <div class="editor">
+        <input type="text" id="note-title" placeholder="Заголовок">
+        <textarea id="note-text" placeholder="Заметка..." rows="8"></textarea>
+        <p id="editor-meta"></p>
+        <div class="editor-buttons">
+          <button id="editor-delete" class="red-btn"></button>
+          <button id="editor-restore" class="hidden"></button>
+          <span class="spacer"></span>
+          <button id="editor-cancel">Отмена</button>
+          <button id="editor-save" class="blue-btn">Сохранить</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
